@@ -5,6 +5,12 @@
 ### (2) DB 생성 o
 ### (3) 문제 풀이 o
 ### (4) 정답 체크 후 다음 문제 이동 o
+### cf) 이미지 필요한 문제있어서 이미지 저장하는거 컬럼 추가 ( 이미지 파일 업로드  or 정적이미지만 할지 생각) + 인풋칸 텍스트아리아로 수정 해야함
+---
 
-### 문제풀기
-![ITSM 문제 이미지](https://github.com/user-attachments/assets/41047416-0156-4ba6-8c09-a18d122606bf)
+### 문제풀기 화면
+![ITSM 문제 이미지](https://github.com/user-attachments/assets/e673a677-25ad-4c72-a21b-fdc0629a6817)
+
+
+### 문제추가 화면
+![ITSM 문제 추가 이미지](https://github.com/user-attachments/assets/7beecf2b-318f-4164-8171-7c292cff44ce)

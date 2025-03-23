@@ -5,26 +5,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>퀴즈 추가</title>
     <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
         .container {
-            max-width: 500px;
-            margin: auto;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-        .input-group {
-            margin: 10px 0;
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
         }
-        .options-container {
-            margin-top: 10px;
-        }
+
         input {
             width: 80%;
-            padding: 8px;
-            margin: 5px 0;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
         }
+
         button {
-            margin: 5px;
-            padding: 5px 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
+
+        button:hover {
+            background-color: #45a049;
+            color: white;
+        }
+
+        button:active {
+            transform: translateY(2px);
+        }
+
+        .options-container {
+            margin-top: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .input-group input {
+            width: 80%;
+        }
+
+        .input-group button {
+            width: 15%;
+            background-color: #f44336;
+            color: white;
+        }
+
+        .input-group button:hover {
+            background-color: #e53935;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
     </style>
 </head>
 <body>
@@ -44,9 +105,11 @@
             <!-- 정답 입력 -->
             <input type="text" name="quizCheck" placeholder="정답 입력" required>
 
-            <!-- 저장 및 뒤로 가기 버튼 -->
-            <button type="submit">퀴즈 저장</button>
-            <button type="button" onclick="goBack()">뒤로 가기</button>
+            <!-- 버튼들 -->
+            <div class="button-container">
+                <button type="submit">퀴즈 저장</button>
+                <button type="button" onclick="goBack()">뒤로 가기</button>
+            </div>
         </form>
     </div>
 

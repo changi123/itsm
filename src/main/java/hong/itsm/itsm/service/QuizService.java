@@ -47,4 +47,8 @@ public class QuizService {
 		return quizMapper.quizContent(quizId);
 	}
 
+	public QuizDto nextQuizId(int quidId) {
+		return quizMapper.nextQuizId(quidId);
+	}
+
 }

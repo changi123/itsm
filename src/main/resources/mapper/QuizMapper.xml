@@ -43,4 +43,13 @@
 		FROM quizContent
 		WHERE quizId = #{quizId}
 	</select>
+	<!-- 다음문제 번호-->
+	<select id="nextQuizId"
+		resultType="hong.itsm.itsm.dto.QuizDto" parameterType="int">
+		SELECT *
+		FROM quiz
+		WHERE quizId > #{quizId}
+		ORDER BY quizId
+		LIMIT 1
+	</select>
 </mapper>

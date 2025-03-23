@@ -20,5 +20,7 @@ public interface QuizMapper {
 
 	List<QuizContentDto> quizContent(int quizId);
 
+	QuizDto nextQuizId(int quidId);
+
 }
 

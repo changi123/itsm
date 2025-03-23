@@ -47,6 +47,21 @@
         button:hover {
             background-color: #0056b3;
         }
+        #goBackBtn {
+            background-color: #6c757d;
+        }
+        #goBackBtn:hover {
+            background-color: #5a6268;
+        }
+        #homeBtn {
+            background-color: #28a745;
+        }
+        #homeBtn:hover {
+            background-color: #218838;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -60,7 +75,7 @@
         <div th:each="content, stat : ${quizContentDto}">
             <!-- 각 항목에 번호를 붙여서 출력 -->
             <div class="option" data-quizContentId="[[${content.quizContentId}]]">
-                <span class="option-number">[[${stat.index + 1}]]번 </span>
+                <span class="option-number">[[${stat.index + 1}]]. </span>
                 <span>[[${content.quizContent}]]</span>
             </div>
         </div>
@@ -68,8 +83,19 @@
 
     <!-- 정답을 저장하는 히든 필드 -->
     <input type="hidden" id="correctAnswerId" th:value="${quizDto.quizCheck}">
+    <input type="hidden" id="quizId" th:value="${quizDto.quizId}">
 
+    <!-- 제출 버튼 -->
     <button id="submitBtn">제출</button>
+
+    <!-- 버튼들 -->
+    <div class="button-container">
+        <!-- 뒤로 가기 버튼 -->
+        <button id="goBackBtn">뒤로 가기</button>
+        
+        <!-- 홈으로 버튼 -->
+        <button id="homeBtn">홈으로</button>
+    </div>
 </div>
 
 <script>
@@ -95,7 +121,7 @@
 
             // 선택된 항목에서 번호만 추출 (예: "1번"에서 "1"만 추출)
             var selectedText = selectedOption.find('.option-number').text().trim();
-            var selectedNumber = selectedText.replace('번', '').trim();  // "번"을 제거한 숫자만 남기기
+            var selectedNumber = selectedText.replace('.', '').trim();  // "번"을 제거한 숫자만 남기기
 
             // 히든 필드에서 정답 ID 가져오기
             var correctAnswerId = $('#correctAnswerId').val();
@@ -103,9 +129,20 @@
             // 선택된 번호와 정답 비교
             if (selectedNumber == correctAnswerId) {
                 alert('정답입니다!');
+                window.location = "/quiz/nextQuiz?quizId="+ $("#quizId").val();
             } else {
                 alert('오답입니다!');
             }
+        });
+
+        // 뒤로 가기 버튼 클릭 시 브라우저 뒤로 가기
+        $('#goBackBtn').click(function() {
+            window.history.back(); // 브라우저의 뒤로가기
+        });
+
+        // 홈으로 버튼 클릭 시 홈 페이지로 이동
+        $('#homeBtn').click(function() {
+            window.location.href = '/'; // 홈 페이지로 이동
         });
     });
 </script>

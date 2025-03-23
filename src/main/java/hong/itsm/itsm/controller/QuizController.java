@@ -32,6 +32,20 @@ public class QuizController {
 		
 		return "quiz";
 	}
+	// 다음문제
+	@GetMapping("/nextQuiz")
+	public String nextQuiz(QuizDto quizDto ,Model model) {
+		quizDto =  quizService.nextQuizId(quizDto.getQuizId());
+		if( quizDto != null) {
+			List<QuizContentDto> quizContentDto =  quizService.quizContent(quizDto.getQuizId());
+			model.addAttribute("quizDto",quizDto);
+			model.addAttribute("quizContentDto",quizContentDto);
+			return "quiz";
+		} else {
+			return "index";
+		}
+
+	}
 	
 	
 	@GetMapping("/quizAdd")

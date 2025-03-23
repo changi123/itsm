@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>퀴즈 페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .options-container {
+            margin-bottom: 20px;
+        }
+        .option {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .option:hover {
+            background-color: #f0f0f0;
+        }
+        .option.selected {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<div class="quiz-container">
+   <h1 class="quiz-title" th:text="${quizDto.quizTitle}"></h1>
+
+    <div class="options-container">
+        <!-- Quiz 보기 동적 렌더링 -->
+        <div th:each="content, stat : ${quizContentDto}">
+            <!-- 각 항목에 번호를 붙여서 출력 -->
+            <div class="option" data-quizContentId="[[${content.quizContentId}]]">
+                <span class="option-number">[[${stat.index + 1}]]번 </span>
+                <span>[[${content.quizContent}]]</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 정답을 저장하는 히든 필드 -->
+    <input type="hidden" id="correctAnswerId" th:value="${quizDto.quizCheck}">
+
+    <button id="submitBtn">제출</button>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // 보기 클릭 시 선택된 보기 스타일 변경
+        $('.option').click(function() {
+            // 이미 선택된 항목이 있을 경우 스타일을 초기화
+            $('.option').removeClass('selected');
+            // 클릭된 항목에 selected 클래스 추가
+            $(this).addClass('selected');
+        });
+
+        // 제출 버튼 클릭 시
+        $('#submitBtn').click(function() {
+            // 선택된 항목 찾기
+            var selectedOption = $('.option.selected');
+            
+            // 선택된 항목이 없으면 경고 메시지
+            if (selectedOption.length === 0) {
+                alert('보기 중 하나를 선택해주세요!');
+                return;
+            }
+
+            // 선택된 항목에서 번호만 추출 (예: "1번"에서 "1"만 추출)
+            var selectedText = selectedOption.find('.option-number').text().trim();
+            var selectedNumber = selectedText.replace('번', '').trim();  // "번"을 제거한 숫자만 남기기
+
+            // 히든 필드에서 정답 ID 가져오기
+            var correctAnswerId = $('#correctAnswerId').val();
+
+            // 선택된 번호와 정답 비교
+            if (selectedNumber == correctAnswerId) {
+                alert('정답입니다!');
+            } else {
+                alert('오답입니다!');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

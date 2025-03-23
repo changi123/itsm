@@ -1,4 +1,4 @@
-package hong.controller;
+package hong.itsm.itsm.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -14,11 +14,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HomeController {
 	@GetMapping("/")
-	public String wordAddPage(HttpSession session) {
-		
-
+	public String homePage(HttpSession session) {
         return "index"; 
 	}
+	
+	
 
 	
 }

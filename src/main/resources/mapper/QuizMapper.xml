@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hong.itsm.itsm.mapper.QuizMapper">
+	<!-- 퀴즈 삽입 SQL -->
+	<insert id="insertQuiz"
+		parameterType="hong.itsm.itsm.dto.QuizDto">
+		INSERT INTO quiz (quizTitle, quizCheck)
+		VALUES
+		(#{quizTitle}, #{quizCheck});
+	</insert>
+
+	<!-- 보기 삽입 SQL -->
+	<insert id="insertQuizOptions"
+		parameterType="hong.itsm.itsm.dto.QuizContentDto">
+		INSERT INTO
+		quizContent (quizId, quizContent)
+		VALUES
+		(#{quizId}, #{quizContent})
+	</insert>
+
+	<!-- 가장 마지막에 추가한 퀴즈 아이디 -->
+	<select id="lastQuizId">
+		SELECT quizId
+		FROM quiz
+		ORDER BY quizId desc
+		Limit 1
+	</select>
+
+	<!-- 첫분제 퀴즈 -->
+	<select id="firstQuiz" resultType="hong.itsm.itsm.dto.QuizDto">
+		SELECT *
+		FROM quiz
+		ORDER BY
+		quizId asc
+		Limit 1
+	</select>
+	
+	
+	<!-- 번호에 해당하는 퀴즈보기들 -->
+	<select id="quizContent"
+		resultType="hong.itsm.itsm.dto.QuizContentDto" parameterType="int">
+		SELECT *
+		FROM quizContent
+		WHERE quizId = #{quizId}
+	</select>
+</mapper>

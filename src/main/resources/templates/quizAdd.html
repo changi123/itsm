@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>퀴즈 추가</title>
+    <style>
+        .container {
+            max-width: 500px;
+            margin: auto;
+            text-align: center;
+        }
+        .input-group {
+            margin: 10px 0;
+        }
+        .options-container {
+            margin-top: 10px;
+        }
+        input {
+            width: 80%;
+            padding: 8px;
+            margin: 5px 0;
+        }
+        button {
+            margin: 5px;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>퀴즈 추가</h1>
+        
+        <form id="quizForm" action="/quiz/quizAdd" method="POST">
+            <!-- 문제 타이틀 입력 -->
+            <input type="text" name="quizTitle" placeholder="문제 타이틀 입력" required>
+
+            <!-- 보기 추가 버튼 -->
+            <button type="button" onclick="addOption()">보기 추가하기</button>
+
+            <!-- 동적으로 보기가 추가될 영역 -->
+            <div id="optionsContainer" class="options-container"></div>
+
+            <!-- 정답 입력 -->
+            <input type="text" name="quizCheck" placeholder="정답 입력" required>
+
+            <!-- 저장 및 뒤로 가기 버튼 -->
+            <button type="submit">퀴즈 저장</button>
+            <button type="button" onclick="goBack()">뒤로 가기</button>
+        </form>
+    </div>
+
+    <script>
+        function addOption() {
+            const optionsContainer = document.getElementById('optionsContainer');
+            const div = document.createElement('div');
+            div.classList.add('input-group');
+            div.innerHTML = `
+                <input type="text" name="options" placeholder="보기 입력" required>
+                <button type="button" onclick="removeOption(this)">삭제</button>
+            `;
+            optionsContainer.appendChild(div);
+        }
+
+        function removeOption(button) {
+            button.parentElement.remove();
+        }
+
+        function goBack() {
+            window.location.href = '/';
+        }
+    </script>
+</body>
+</html>
